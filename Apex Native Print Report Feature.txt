@@ -1,0 +1,89 @@
+Go to the Shared Component --> Files and Reports --> Report Queries 
+
+Step 1: Click the Create Button 
+	Report Query Name: EMPLOYEE_APPOINTMENT_LETTER
+Click Next
+	Output Format: PDF
+	View File as: Inline
+Click Next
+	Choose Source Type: SQL Query
+	Enter Query:
+	 select FIRST_NAME, LAST_NAME, EMAIL, PHONE, HIRE_DATE, SALARY from employees where emp_id=:P_EMPLOYEE_ID
+	
+Click Next--> Click Next --> Finish
+
+
+
+Step 2: Now Create a Blank Page.
+	Name: Employee Report Print
+
+Step 3: Create a Page item 
+	Name: Employee Report Print
+	Type: Select List
+	List of values:
+		SQL Query:
+			SELECT FIRST_NAME || ' (' || LAST_NAME || ')' AS display_value,
+     			EMP_ID AS return_value
+			FROM employees
+			ORDER BY FIRST_NAME	
+
+Step 4: Create a Button
+	Name: Get_Appointment_Letter
+	Title: Get PDF Appointment Letter
+	
+Step 5: Create Triggered Action		
+	Action: Execute JavaScript Code
+	
+
+
+
+// 1. Get the current page item value
+var empId = apex.item("P2_EMPLOYEE_ID").getValue();
+
+// 2. Build the correct Report Query URL syntax
+var url = "f?p=&APP_ID.:0:&SESSION.:PRINT_REPORT=EMPLOYEE_APPOINTMENT_LETTER:::P_EMPLOYEE_ID:" + encodeURIComponent(empId);
+
+// 3. Open it in a new tab
+apex.navigation.openInNewWindow(url);
+
+
+Step 6: Now Run the Page. 
+	Select the employee name from Lov and click button
+
+
+--------------------------------------------------Formating of Report-----------Next Step Start------------------------------------
+
+Step 7: Now we need to format the report so that we can add Logo and add Caption in heading.
+	
+prerequisite: BI Publisher plug-in in your MS Word Document.
+
+
+Step 8: Go to the shared component --> Report Quries--> Select you Query --> Output Format --> XML --> Run the report--> copy the XML tags--> Save into the XML File. 
+
+Step 9: Now Open the Word Document --> load this XML file data using PI Bulisher Plug-in/Add-Ins
+
+Step 10: Click -->Insert --> Table wizard --> Choose Grouping Fields--> Next-->Next-->Next-->Finish
+
+Step 11: Add Heading in Document Header
+
+Step 12: Add Logo. 
+
+Step 13: Save file with (rich text format) extension.
+
+Step 15: Go to Shared Components --> Report Layout --> Click Create --> Report Format Name --> Choose Named Columns (RTF) --> Upload .rtf file.  
+
+Step 16: Go to the Report Quires --> Choose your Query --> Choose Report Layout that we have created. 
+
+
+Now Run the Report. 
+
+--------------------------------------------------Formating of Report-----------Next Step End--------------------------------------
+
+
+
+
+
+
+
+
+
