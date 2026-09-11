@@ -38,7 +38,7 @@ Step 5: Create Triggered Action
 
 
 // 1. Get the current page item value
-var empId = apex.item("P2_EMPLOYEE_ID").getValue();
+var empId = apex.item("P1_EMPLOYEE_ID").getValue();
 
 // 2. Build the correct Report Query URL syntax
 var url = "f?p=&APP_ID.:0:&SESSION.:PRINT_REPORT=EMPLOYEE_APPOINTMENT_LETTER:::P1_EMPLOYEE_ID:" + encodeURIComponent(empId);
