@@ -8,7 +8,7 @@ Click Next
 Click Next
 	Choose Source Type: SQL Query
 	Enter Query:
-	 select FIRST_NAME, LAST_NAME, EMAIL, PHONE, HIRE_DATE, SALARY from employees where emp_id=:P_EMPLOYEE_ID
+	 select FIRST_NAME, LAST_NAME, EMAIL, PHONE, HIRE_DATE, SALARY from employees where emp_id=:P1_EMPLOYEE_ID
 	
 Click Next--> Click Next --> Finish
 
@@ -41,7 +41,7 @@ Step 5: Create Triggered Action
 var empId = apex.item("P2_EMPLOYEE_ID").getValue();
 
 // 2. Build the correct Report Query URL syntax
-var url = "f?p=&APP_ID.:0:&SESSION.:PRINT_REPORT=EMPLOYEE_APPOINTMENT_LETTER:::P_EMPLOYEE_ID:" + encodeURIComponent(empId);
+var url = "f?p=&APP_ID.:0:&SESSION.:PRINT_REPORT=EMPLOYEE_APPOINTMENT_LETTER:::P1_EMPLOYEE_ID:" + encodeURIComponent(empId);
 
 // 3. Open it in a new tab
 apex.navigation.openInNewWindow(url);
